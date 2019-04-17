@@ -1,0 +1,42 @@
+{
+    "name": "andreshg112/hablame-sms",
+    "description": "Cliente para comunicarse con la API para SMS de Háblame Colombia.",
+    "keywords": [
+        "andreshg112",
+        "hablame-sms"
+    ],
+    "homepage": "https://github.com/andreshg112/hablame-sms",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Andrés Herrera García",
+            "email": "andreshg112@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Andreshg112\\HablameSms\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Andreshg112\\HablameSms\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
