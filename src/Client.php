@@ -12,7 +12,7 @@ class Client
     /** @var string $client Número del cliente en Háblame SMS. */
     protected $client = null;
 
-    /** @var GuzzleClient $http Cliente de Guzzle. */
+    /** @var \GuzzleHttp\Client $http Cliente de Guzzle. */
     protected $http = null;
 
     /**
@@ -20,7 +20,7 @@ class Client
      *
      * @param string $client
      * @param string $api
-     * @param GuzzleClient $http
+     * @param \GuzzleHttp\Client $http
      */
     public function __construct(string $client, string $api, GuzzleClient $http = null)
     {
@@ -36,13 +36,13 @@ class Client
      *
      * @return array
      */
-    public function checkBalance()
+    public function checkBalance(): array
     {
         $url = 'https://api.hablame.co/saldo/consulta/index.php';
 
         $params = ['cliente' => $this->client, 'api' => $this->api];
 
-        $response = $this->http->post($url, ['form_params' => $params]);
+        $response = $this->http->get($url, ['query' => $params]);
 
         return json_decode((string)$response->getBody(), true);
     }
@@ -50,12 +50,12 @@ class Client
     /**
      * Envía un mensaje de texto (SMS) al destinatario o destinatarios indicados.
      *
-     * @param int|string $phoneNumbers Número(s) telefonicos a enviar SMS (separados por una coma).
+     * @param int|string $phoneNumbers Número(s) telefonico(s) a enviar SMS (separados por una coma).
      * @param string $sms Mensaje de texto a enviar.
      * @param string $reference [optional] Numero de referencia o nombre de campaña.
      * @return array
      */
-    public function sendMessage($phoneNumbers, $sms, $reference = null)
+    public function sendMessage($phoneNumbers, $sms, $reference = null): array
     {
         $url = 'https://api.hablame.co/sms/envio';
 
@@ -67,7 +67,7 @@ class Client
             'referencia' => $reference,
         ];
 
-        $response = $this->http->post($url, ['form_params' => $params]);
+        $response = $this->http->post($url, ['query' => $params]);
 
         return json_decode((string)$response->getBody(), true);
     }
