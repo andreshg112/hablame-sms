@@ -21,6 +21,8 @@
         "guzzlehttp/guzzle": "^6.3"
     },
     "require-dev": {
+        "illuminate/notifications": "^5.3",
+        "illuminate/support": "^5.1|^5.2|^5.3",
         "phpunit/phpunit": "^7.0"
     },
     "autoload": {
@@ -39,5 +41,15 @@
     },
     "config": {
         "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Andreshg112\\HablameSms\\HablameSmsServiceProvider"
+            ],
+            "aliases": {
+                "HablameSms": "Andreshg112\\HablameSms\\HablameSmsFacade"
+            }
+        }
     }
 }
