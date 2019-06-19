@@ -48,7 +48,7 @@
                 "Andreshg112\\HablameSms\\HablameSmsServiceProvider"
             ],
             "aliases": {
-                "HablameSms": "Andreshg112\\HablameSms\\HablameSmsFacade"
+                "HablameSms": "Andreshg112\\HablameSms\\Facade"
             }
         }
     }

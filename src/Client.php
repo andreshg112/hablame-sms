@@ -52,7 +52,7 @@ class Client
      *
      * @param int|string $phoneNumbers Número(s) telefonico(s) a enviar SMS (separados por una coma).
      * @param string $sms Mensaje de texto a enviar.
-     * @param string $reference [optional] Numero de referencia o nombre de campaña.
+     * @param string $reference [optional] Número de referencia o nombre de campaña.
      * @return array
      */
     public function sendMessage($phoneNumbers, $sms, $reference = null): array
