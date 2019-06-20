@@ -50,13 +50,18 @@ class Client
     /**
      * Envía un mensaje de texto (SMS) al destinatario o destinatarios indicados.
      *
-     * @param int|string $phoneNumbers Número(s) telefonico(s) a enviar SMS (separados por una coma).
+     * @param string $phoneNumbers Número(s) telefonico(s) a enviar SMS (separados por coma).
      * @param string $sms Mensaje de texto a enviar.
-     * @param string $reference [optional] Número de referencia o nombre de campaña.
+     * @param string|null $datetime [optional] Fecha de envío. Si está vacío, se envía inmediatamente.
+     * @param string|null $reference [optional] Número de referencia o nombre de campaña.
      * @return array
      */
-    public function sendMessage($phoneNumbers, $sms, $reference = null): array
-    {
+    public function sendMessage(
+        string $phoneNumbers,
+        string $sms,
+        string $datetime = null,
+        string $reference = null
+    ): array {
         $url = 'https://api.hablame.co/sms/envio';
 
         $params = [
@@ -64,10 +69,11 @@ class Client
             'api' => $this->api,
             'numero' => $phoneNumbers,
             'sms' => $sms,
+            'fecha' => $datetime,
             'referencia' => $reference,
         ];
 
-        $response = $this->http->post($url, ['query' => $params]);
+        $response = $this->http->post($url, ['query' => array_filter($params)]);
 
         return json_decode((string)$response->getBody(), true);
     }
