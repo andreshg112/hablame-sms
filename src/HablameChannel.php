@@ -11,7 +11,7 @@ class HablameChannel
      * Send the given notification.
      *
      * @param mixed $notifiable
-     * @param \Illuminate\Notifications\Notification $notification
+     * @param \Illuminate\Notifications\Notification|\Andreshg112\HablameSms\Tests\TestNotification $notification
      *
      * @throws \Andreshg112\HablameSms\Exceptions\CouldNotSendNotification
      */

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Facade as BaseFacade;
 
 /**
  * @see \Andreshg112\HablameSms\Client
+ * @method static array sendMessage(string $phoneNumbers, string $sms, ?string $datetime, ?string $reference)
  */
 class Facade extends BaseFacade
 {
