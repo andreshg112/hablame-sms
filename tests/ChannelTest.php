@@ -67,9 +67,9 @@ class ChannelTest extends TestCase
                     'ind_area_nom' => 'Colombia Celular',
                     'precio_sms' => '9.00000',
                     'resultado_t' => '',
-                    'resultado' => '0'
-                ]
-            ]
+                    'resultado' => '0',
+                ],
+            ],
         ];
 
         /** @var \Andreshg112\HablameSms\HablameMessage $message */
@@ -106,7 +106,7 @@ class ChannelTest extends TestCase
             'sms_procesados' => 0,
             'referecia' => null,
             'ip' => null,
-            'sms' => null
+            'sms' => null,
         ];
 
         /** @var \Andreshg112\HablameSms\HablameMessage $message */
