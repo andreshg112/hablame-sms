@@ -11,13 +11,15 @@ class HablameChannel
      * Send the given notification.
      *
      * @param mixed $notifiable
-     * @param \Illuminate\Notifications\Notification|\Andreshg112\HablameSms\Tests\TestNotification $notification
+     * @param \Illuminate\Notifications\Notification $notification
      *
      * @throws \Andreshg112\HablameSms\Exceptions\CouldNotSendNotification
      */
     public function send($notifiable, Notification $notification)
     {
         /** @var \Andreshg112\HablameSms\HablameMessage $message */
+
+        /** @scrutinizer ignore-call */
         $message = $notification->toHablameNotification($notifiable);
 
         $message = $message->toArray();
