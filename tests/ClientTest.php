@@ -1,6 +1,6 @@
 <?php
 
-namespace Andreshg112\TecniRtm\Tests;
+namespace Andreshg112\HablameSms\Tests;
 
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
