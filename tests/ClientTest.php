@@ -69,9 +69,9 @@ class ClientTest extends TestCase
                     'ind_area_nom' => 'Colombia Celular',
                     'precio_sms' => '9.00000',
                     'resultado_t' => '',
-                    'resultado' => '0'
-                ]
-            ]
+                    'resultado' => '0',
+                ],
+            ],
         ];
 
         /** @var callable $mock */

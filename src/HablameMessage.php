@@ -67,7 +67,7 @@ class HablameMessage
 
     /**
      * [optional] Fecha de envío. Si está vacío, se envía inmediatamente.
-     * (Ejemplo: 2017-12-31 23:59:59)
+     * (Ejemplo: 2017-12-31 23:59:59).
      *
      * @param string|null $datetime
      * @return  $this
