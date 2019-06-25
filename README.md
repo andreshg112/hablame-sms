@@ -96,11 +96,11 @@ $response = \Hablame::checkBalance();
 $response = \Hablame::sendMessage($phoneNumbers, $sms, $datetime, $reference);
 ```
 
-> Si usas Laravel < 5.5, debes agregar \Andreshg112\HablameSms\HablameSmsServiceProvider al array de `providers` en `config/app.php`.
+> Si usas Laravel < 5.5, debes agregar `\Andreshg112\HablameSms\HablameSmsServiceProvider` al array de `providers` en `config/app.php`.
 
 #### Notificaciones
 
-Puedes enviar notificaciones usando el [sistema integrado en Laravel](https://laravel.com/docs/5.5/notifications) que facilita su envío. Ten en cuenta que debes saber usar las notificaciones de Laravel antes de usar este paquete.
+Puedes enviar notificaciones usando el [sistema integrado en Laravel](https://laravel.com/docs/5.5/notifications) que facilita su envío. Ten en cuenta que debes saber implementar las notificaciones de Laravel antes de usar esta funcionalidad.
 
 En tu notificación, añade `HablameChannel::class` al array que retorna la función `via()`:
 
