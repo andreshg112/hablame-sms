@@ -96,7 +96,7 @@ $response = \Hablame::checkBalance();
 $response = \Hablame::sendMessage($phoneNumbers, $sms, $datetime, $reference);
 ```
 
-> Si usas Laravel < 5.5, debes agregar `\Andreshg112\HablameSms\HablameSmsServiceProvider` al array de `providers` en `config/app.php`.
+> Si usas Laravel < 5.5, debes agregar `\Andreshg112\HablameSms\HablameSmsServiceProvider::class` al array de `providers` en `config/app.php`.
 
 #### Notificaciones
 
