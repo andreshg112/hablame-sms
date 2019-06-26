@@ -17,7 +17,7 @@ Este paquete facilita la conexión con la API de [Háblame SMS](https://www.habl
 
 ## Instalación
 
-Puedes instalar el paquete a través de composer:s
+Puedes instalar el paquete a través de composer:
 
 ```bash
 composer require andreshg112/hablame-sms
@@ -96,16 +96,16 @@ $response = \Hablame::checkBalance();
 $response = \Hablame::sendMessage($phoneNumbers, $sms, $datetime, $reference);
 ```
 
-> Si usas Laravel < 5.5, debes agregar `\Andreshg112\HablameSms\HablameSmsServiceProvider::class` al array de `providers` en `config/app.php`.
+> Si usas Laravel < 5.5, debes agregar `\Andreshg112\HablameSms\HablameSmsServiceProvider::class` al arreglo de `providers` en `config/app.php`.
 
 #### Notificaciones
 
-Puedes enviar notificaciones usando el [sistema integrado en Laravel](https://laravel.com/docs/5.5/notifications) que facilita su envío. Ten en cuenta que debes saber implementar las notificaciones de Laravel antes de usar esta funcionalidad.
+Puedes enviar notificaciones usando el [sistema integrado en Laravel](https://laravel.com/docs/5.5/notifications) que facilita el proceso y organiza el código. Ten en cuenta que debes saber implementar las [notificaciones de Laravel](https://code.tutsplus.com/es/tutorials/notifications-in-laravel--cms-30499) antes de usar esta funcionalidad.
 
 En tu notificación, añade `HablameChannel::class` al array que retorna la función `via()`:
 
 ```php
-use \Andreshg112\HablameSms\HablameChannel;
+use Andreshg112\HablameSms\HablameChannel;
 
 public function via($notifiable)
 {
@@ -116,7 +116,7 @@ public function via($notifiable)
 Luego, crea un método llamado `toHablameNotification()` en tu clase:
 
 ```php
-use \Andreshg112\HablameSms\HablameMessage;
+use Andreshg112\HablameSms\HablameMessage;
 
 public function toHablameNotification($notifiable)
 {
