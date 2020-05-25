@@ -2,10 +2,10 @@
 
 namespace Andreshg112\HablameSms\Tests;
 
-use Orchestra\Testbench\TestCase;
 use Andreshg112\HablameSms\Facade;
-use Illuminate\Support\Facades\Config;
 use Andreshg112\HablameSms\HablameSmsServiceProvider;
+use Illuminate\Support\Facades\Config;
+use Orchestra\Testbench\TestCase;
 
 class FacadeTest extends TestCase
 {

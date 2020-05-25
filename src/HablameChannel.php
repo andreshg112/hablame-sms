@@ -2,8 +2,8 @@
 
 namespace Andreshg112\HablameSms;
 
-use Illuminate\Notifications\Notification;
 use Andreshg112\HablameSms\Exceptions\CouldNotSendNotification;
+use Illuminate\Notifications\Notification;
 
 class HablameChannel
 {

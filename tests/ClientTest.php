@@ -2,13 +2,13 @@
 
 namespace Andreshg112\HablameSms\Tests;
 
+use Andreshg112\HablameSms\Client;
+use GuzzleHttp\Client as GuzzleClient;
+use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
+use function GuzzleHttp\json_encode;
 use GuzzleHttp\Psr7\Response;
 use Orchestra\Testbench\TestCase;
-use Andreshg112\HablameSms\Client;
-use GuzzleHttp\Handler\MockHandler;
-use function GuzzleHttp\json_encode;
-use GuzzleHttp\Client as GuzzleClient;
 
 class ClientTest extends TestCase
 {
