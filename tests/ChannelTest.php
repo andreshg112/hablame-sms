@@ -91,6 +91,64 @@ class ChannelTest extends TestCase
     }
 
     /** @test */
+    public function it_can_send_a_notification_to_many()
+    {
+        $mockedResponse = [
+            'cliente' => '12345678',
+            'lote_id' => 0,
+            'fecha_recepcion' => '2019-06-12 22:39:58',
+            'resultado' => 0,
+            'resultado_t' => null,
+            'sms_procesados' => 2,
+            'referecia' => 'Campaña promocional',
+            'ip' => '190.9.191.119',
+            'sms' => [
+                '1' => [
+                    'id' => '1234567890123456',
+                    'numero' => '573123456789',
+                    'sms' => 'Mensaje de prueba',
+                    'fecha_envio' => '2019-06-12 22:39:58',
+                    'ind_area_nom' => 'Colombia Celular',
+                    'precio_sms' => '9.00000',
+                    'resultado_t' => '',
+                    'resultado' => '0',
+                ],
+                /**
+                 * Aunque uno retorne error (1), la notificación se toma por
+                 * enviada. Se debe mejorar en futuras versiones.
+                 */
+                '2' => [
+                    'id' => '1234567890123456',
+                    'numero' => '573123456780',
+                    'sms' => 'Mensaje de prueba',
+                    'fecha_envio' => '2019-06-12 22:39:58',
+                    'ind_area_nom' => 'Colombia Celular',
+                    'precio_sms' => '-1.00000',
+                    'resultado_t' => 'No tiene saldo disponible',
+                    'resultado' => '1',
+                ],
+            ],
+        ];
+
+        /** @var \Andreshg112\HablameSms\HablameMessage $message */
+        $message = $this->notification->toHablameNotification($this->notifiable);
+
+        $data = $message->toArray();
+
+        Facade::shouldReceive('sendMessage')
+            ->with(
+                $data['numero'],
+                $data['sms'],
+                $data['fecha'],
+                $data['referencia']
+            )
+            ->once()
+            ->andReturn($mockedResponse);
+
+        $this->channel->send($this->notifiable, $this->notification);
+    }
+
+    /** @test */
     public function it_cannot_send_a_notification()
     {
         $this->expectException(CouldNotSendNotification::class);
@@ -107,6 +165,62 @@ class ChannelTest extends TestCase
             'referecia' => null,
             'ip' => null,
             'sms' => null,
+        ];
+
+        /** @var \Andreshg112\HablameSms\HablameMessage $message */
+        $message = $this->notification->toHablameNotification($this->notifiable);
+
+        $data = $message->toArray();
+
+        Facade::shouldReceive('sendMessage')
+            ->with(
+                $data['numero'],
+                $data['sms'],
+                $data['fecha'],
+                $data['referencia']
+            )
+            ->once()
+            ->andReturn($mockedResponse);
+
+        $this->channel->send($this->notifiable, $this->notification);
+    }
+
+    /** @test */
+    public function it_cannot_send_a_notification_to_many()
+    {
+        $this->expectException(CouldNotSendNotification::class);
+
+        $mockedResponse = [
+            'cliente'         => '12345678',
+            'lote_id'         => 0,
+            'fecha_recepcion' => '2019-06-12 22:39:58',
+            'resultado'       => 0,
+            'resultado_t'     => null,
+            'sms_procesados'  => 2,
+            'referecia'       => 'Campaña promocional',
+            'ip'              => '190.9.191.119',
+            'sms'             => [
+                '1' => [
+                    'id'           => '1234567890123456',
+                    'numero'       => '573123456789',
+                    'sms'          => 'Mensaje de prueba',
+                    'fecha_envio'  => '2019-06-12 22:39:58',
+                    'ind_area_nom' => 'Colombia Celular',
+                    'precio_sms'   => '-1.00000',
+                    'resultado_t'  => 'No tiene saldo disponible',
+                    'resultado'    => '1',
+                ],
+                '2' => [
+                    'id'           => '1234567890123456',
+                    'numero'       => '573123456780',
+                    'sms'          => 'Mensaje de prueba',
+                    'fecha_envio'  => '2019-06-12 22:39:58',
+                    'ind_area_nom' => 'Colombia Celular',
+                    'precio_sms'   => '-1.00000',
+                    'resultado_t'  => 'No tiene saldo disponible',
+                    'resultado'    => '1',
+                ],
+            ],
         ];
 
         /** @var \Andreshg112\HablameSms\HablameMessage $message */

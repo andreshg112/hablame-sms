@@ -31,8 +31,30 @@ class HablameChannel
             $message['referencia']
         );
 
+        /**
+         * La API retorna 1 para cuando hay error a nivel general, por ejemplo,
+         * errores en los parámetros.
+         */
         if ($response['resultado'] !== 0) {
             throw CouldNotSendNotification::serviceRespondedWithAnError($response);
         }
+
+        /**
+         * Sin embargo, cuando el problema es de saldo, retorna resultado = 0,
+         * por lo que hay que evaluar el resultado de cada sms.
+         */
+        $collect = collect(array_values($response['sms']));
+
+        $failed = $collect->every(function (array $item) {
+            return (int) $item['resultado'] !== 0;
+        });
+
+        // Si todos fallaron, o sea, ninguno se pudo enviar, lanza error.
+        throw_if(
+            $failed,
+            CouldNotSendNotification::serviceRespondedWithAnError(
+                $response
+            )
+        );
     }
 }
