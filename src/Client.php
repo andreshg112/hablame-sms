@@ -6,13 +6,13 @@ use GuzzleHttp\Client as GuzzleClient;
 
 class Client
 {
-    /** @var string $api Clave API suministrada por Háblame SMS. */
+    /** @var string Clave API suministrada por Háblame SMS. */
     protected $api = null;
 
-    /** @var string $client Número del cliente en Háblame SMS. */
+    /** @var string Número del cliente en Háblame SMS. */
     protected $client = null;
 
-    /** @var \GuzzleHttp\Client $http Cliente de Guzzle. */
+    /** @var \GuzzleHttp\Client Cliente de Guzzle. */
     protected $http = null;
 
     /**

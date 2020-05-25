@@ -4,16 +4,16 @@ namespace Andreshg112\HablameSms;
 
 class HablameMessage
 {
-    /** @var string|null $phoneNumbers */
+    /** @var string|null */
     protected $phoneNumbers = null;
 
-    /** @var string|null $sms */
+    /** @var string|null */
     protected $sms = null;
 
-    /** @var string|null $datetime */
+    /** @var string|null */
     protected $datetime = null;
 
-    /** @var string|null $reference */
+    /** @var string|null */
     protected $reference = null;
 
     /**

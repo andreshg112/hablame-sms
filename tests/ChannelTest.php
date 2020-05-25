@@ -2,28 +2,28 @@
 
 namespace Andreshg112\HablameSms\Tests;
 
-use Orchestra\Testbench\TestCase;
+use Andreshg112\HablameSms\Exceptions\CouldNotSendNotification;
 use Andreshg112\HablameSms\Facade;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Notifications\Notifiable;
 use Andreshg112\HablameSms\HablameChannel;
 use Andreshg112\HablameSms\HablameMessage;
-use Illuminate\Notifications\Notification;
 use Andreshg112\HablameSms\HablameSmsServiceProvider;
-use Andreshg112\HablameSms\Exceptions\CouldNotSendNotification;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Config;
+use Orchestra\Testbench\TestCase;
 
 class ChannelTest extends TestCase
 {
-    /** @var \Andreshg112\HablameSms\Facade|\Andreshg112\HablameSms\Client $hablame */
+    /** @var \Andreshg112\HablameSms\Facade|\Andreshg112\HablameSms\Client */
     protected $hablame = null;
 
-    /** @var \Andreshg112\HablameSms\HablameChannel $channel */
+    /** @var \Andreshg112\HablameSms\HablameChannel */
     protected $channel = null;
 
-    /** @var TestNotification $notification */
+    /** @var TestNotification */
     protected $notification = null;
 
-    /** @var TestNotifiable $notifiable */
+    /** @var TestNotifiable */
     protected $notifiable = null;
 
     public function setUp(): void

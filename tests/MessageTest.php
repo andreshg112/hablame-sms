@@ -2,9 +2,9 @@
 
 namespace Andreshg112\HablameSms\Tests;
 
-use Orchestra\Testbench\TestCase;
 use Andreshg112\HablameSms\HablameMessage;
 use Illuminate\Foundation\Testing\WithFaker;
+use Orchestra\Testbench\TestCase;
 
 class MessageTest extends TestCase
 {
