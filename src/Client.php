@@ -41,40 +41,50 @@ class Client
     {
         $url = self::API_URL . 'account/v1/status';
 
-        $params = ['account' => $this->account, 'apikey' => $this->apikey, 'token' => $this->token];
-
-        $response = $this->http->get($url, ['headers' => $params]);
+        $response = $this->http->get($url, ['headers' => $this->getAuthHeaders()]);
 
         return json_decode((string)$response->getBody(), true);
     }
 
+    private function getAuthHeaders(): array
+    {
+        return [
+            'account' => $this->account,
+            'apikey' => $this->apikey,
+            'token' => $this->token,
+        ];
+    }
+
     /**
-     * Envía un mensaje de texto (SMS) al destinatario o destinatarios indicados.
+     * Envía un mensaje de texto (SMS) al destinatario indicado.
      *
-     * @param string $phoneNumbers Número(s) telefonico(s) a enviar SMS (separados por coma).
+     * @param string $phoneNumber Número telefonico a enviar SMS.
      * @param string $sms Mensaje de texto a enviar.
      * @param string|null $datetime [optional] Fecha de envío. Si está vacío, se envía inmediatamente.
      * @param string|null $reference [optional] Número de referencia o nombre de campaña.
+     * @param bool $flash [optional] Indica si es un mensaje flash, es decir, que ocupa la pantalla.
+     * @param bool $priority [optional] Indica si el mensaje es prioritario (costo adicional).
      * @return array
      */
     public function sendMessage(
-        string $phoneNumbers,
+        string $phoneNumber,
         string $sms,
         string $datetime = null,
-        string $reference = null
+        string $reference = null,
+        bool $flash = false,
+        bool $priority = false
     ): array {
-        $url = 'https://api.hablame.co/sms/envio';
+        $url = self::API_URL . 'sms/v3/send/' . ($priority ? 'priority' : 'marketing');
 
         $params = [
-            'cliente' => $this->account,
-            'api' => $this->apikey,
-            'numero' => $phoneNumbers,
+            'toNumber' => $phoneNumber,
             'sms' => $sms,
-            'fecha' => $datetime,
-            'referencia' => $reference,
+            'flash' => (int)$flash,
+            'sendDate' => isset($datetime) ? strtotime($datetime) : null,
+            'reference_1' => $reference,
         ];
 
-        $response = $this->http->post($url, ['query' => array_filter($params)]);
+        $response = $this->http->post($url, ['headers' => $this->getAuthHeaders(), 'json' => array_filter($params)]);
 
         return json_decode((string)$response->getBody(), true);
     }
