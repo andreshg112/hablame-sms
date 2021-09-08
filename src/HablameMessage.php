@@ -4,33 +4,29 @@ namespace Andreshg112\HablameSms;
 
 class HablameMessage
 {
-    /** @var string|null */
-    protected $phoneNumbers = null;
+    private ?string $phoneNumber = null;
 
-    /** @var string|null */
-    protected $sms = null;
+    private ?string $sms = null;
 
-    /** @var string|null */
-    protected $datetime = null;
+    private ?string $datetime = null;
 
-    /** @var string|null */
-    protected $reference = null;
+    private ?string $reference = null;
 
     /**
      * Creates the instance.
      *
-     * @param string|null $phoneNumbers
+     * @param string|null $phoneNumber
      * @param string|null $sms
      * @param string|null $datetime
      * @param string|null $reference
      */
     public function __construct(
-        string $phoneNumbers = null,
+        string $phoneNumber = null,
         string $sms = null,
         string $datetime = null,
         string $reference = null
     ) {
-        $this->phoneNumbers = $phoneNumbers;
+        $this->phoneNumber = $phoneNumber;
 
         $this->sms = $sms;
 
@@ -40,14 +36,14 @@ class HablameMessage
     }
 
     /**
-     * Número(s) telefonico(s) a enviar SMS (separados por una coma).
+     * Número telefonico a enviar SMS.
      *
-     * @param string $phoneNumbers
+     * @param string $phoneNumber
      * @return  $this
      */
-    public function phoneNumbers(string $phoneNumbers): self
+    public function phoneNumber(string $phoneNumber): self
     {
-        $this->phoneNumbers = $phoneNumbers;
+        $this->phoneNumber = $phoneNumber;
 
         return $this;
     }
@@ -95,10 +91,10 @@ class HablameMessage
     public function toArray(): array
     {
         return [
-            'numero' => $this->phoneNumbers,
+            'toNumber' => $this->phoneNumber,
             'sms' => $this->sms,
-            'fecha' => $this->datetime,
-            'referencia' => $this->reference,
+            'sendDate' => $this->datetime,
+            'reference' => $this->reference,
         ];
     }
 }

@@ -48,7 +48,7 @@ class MessageTest extends TestCase
         ];
 
         $message = (new HablameMessage())
-            ->phoneNumbers($attributes['numero'])
+            ->phoneNumber($attributes['numero'])
             ->sms($attributes['sms'])
             ->datetime($attributes['fecha'])
             ->reference($attributes['referencia']);

@@ -17,44 +17,22 @@ class HablameChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        /** @var \Andreshg112\HablameSms\HablameMessage $message */
-
         /** @scrutinizer ignore-call */
         $message = $notification->toHablameNotification($notifiable);
 
-        $message = $message->toArray();
+        /** @var \Andreshg112\HablameSms\HablameMessage $message */
 
-        $response = Facade::sendMessage(
-            $message['numero'],
-            $message['sms'],
-            $message['fecha'],
-            $message['referencia']
-        );
+        $messageArray = $message->toArray();
 
-        /**
-         * La API retorna 1 para cuando hay error a nivel general, por ejemplo,
-         * errores en los parámetros.
-         */
-        if ($response['resultado'] !== 0) {
-            throw CouldNotSendNotification::serviceRespondedWithAnError($response);
+        try {
+            Facade::sendMessage(
+                $messageArray['toNumber'],
+                $messageArray['sms'],
+                $messageArray['sendDate'],
+                $messageArray['reference']
+            );
+        } catch (\Throwable $th) {
+            throw new CouldNotSendNotification($th->getMessage(), $th->getCode(), $th);
         }
-
-        /**
-         * Sin embargo, cuando el problema es de saldo, retorna resultado = 0,
-         * por lo que hay que evaluar el resultado de cada sms.
-         */
-        $collect = collect(array_values($response['sms']));
-
-        $failed = $collect->every(function (array $item) {
-            return (int) $item['resultado'] !== 0;
-        });
-
-        // Si todos fallaron, o sea, ninguno se pudo enviar, lanza error.
-        throw_if(
-            $failed,
-            CouldNotSendNotification::serviceRespondedWithAnError(
-                $response
-            )
-        );
     }
 }
