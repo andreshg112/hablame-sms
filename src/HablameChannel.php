@@ -21,7 +21,6 @@ class HablameChannel
         $message = $notification->toHablameNotification($notifiable);
 
         /** @var \Andreshg112\HablameSms\HablameMessage $message */
-
         $messageArray = $message->toArray();
 
         try {
