@@ -29,8 +29,9 @@ class HablameSmsServiceProvider extends ServiceProvider
             $http = isset($callback) ? $callback() : null;
 
             return new Client(
-                Config::get('services.hablame_sms.cliente'),
-                Config::get('services.hablame_sms.api'),
+                Config::get('services.hablame_sms.account'),
+                Config::get('services.hablame_sms.apikey'),
+                Config::get('services.hablame_sms.token'),
                 $http
             );
         });

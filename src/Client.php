@@ -6,43 +6,44 @@ use GuzzleHttp\Client as GuzzleClient;
 
 class Client
 {
-    /** @var string Clave API suministrada por Háblame SMS. */
-    protected $api = null;
+    private const API_URL = 'https://api103.hablame.co/api/';
 
-    /** @var string Número del cliente en Háblame SMS. */
-    protected $client = null;
+    /** Clave API suministrada por Háblame SMS. */
+    private string $apikey;
 
-    /** @var \GuzzleHttp\Client Cliente de Guzzle. */
-    protected $http = null;
+    /** Número del cliente en Háblame SMS. */
+    private string $account;
+
+    /** Cliente de Guzzle. */
+    private GuzzleClient $http;
+
+    /** Token enviado por correo al cliente desde el panel de Háblame SMS. */
+    private string $token;
 
     /**
      * Crea una instancia recibiendo el número del cliente y la clave.
-     *
-     * @param string $client
-     * @param string $api
-     * @param \GuzzleHttp\Client $http
      */
-    public function __construct(string $client, string $api, GuzzleClient $http = null)
+    public function __construct(string $account, string $apikey, string $token, GuzzleClient $http = null)
     {
-        $this->client = $client;
+        $this->account = $account;
 
-        $this->api = $api;
+        $this->apikey = $apikey;
+
+        $this->token = $token;
 
         $this->http = $http ?? new GuzzleClient();
     }
 
     /**
      * Consulta el saldo.
-     *
-     * @return array
      */
     public function checkBalance(): array
     {
-        $url = 'https://api.hablame.co/saldo/consulta/index.php';
+        $url = self::API_URL . 'account/v1/status';
 
-        $params = ['cliente' => $this->client, 'api' => $this->api];
+        $params = ['account' => $this->account, 'apikey' => $this->apikey, 'token' => $this->token];
 
-        $response = $this->http->get($url, ['query' => $params]);
+        $response = $this->http->get($url, ['headers' => $params]);
 
         return json_decode((string)$response->getBody(), true);
     }
@@ -65,8 +66,8 @@ class Client
         $url = 'https://api.hablame.co/sms/envio';
 
         $params = [
-            'cliente' => $this->client,
-            'api' => $this->api,
+            'cliente' => $this->account,
+            'api' => $this->apikey,
             'numero' => $phoneNumbers,
             'sms' => $sms,
             'fecha' => $datetime,
