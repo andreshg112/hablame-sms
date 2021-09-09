@@ -4,46 +4,33 @@ namespace Andreshg112\HablameSms;
 
 class HablameMessage
 {
-    private ?string $phoneNumber = null;
+    private ?string $phoneNumbers = null;
 
     private ?string $sms = null;
 
     private ?string $datetime = null;
 
-    private ?string $reference = null;
-
-    /**
-     * Creates the instance.
-     *
-     * @param string|null $phoneNumber
-     * @param string|null $sms
-     * @param string|null $datetime
-     * @param string|null $reference
-     */
     public function __construct(
         string $phoneNumber = null,
         string $sms = null,
-        string $datetime = null,
-        string $reference = null
+        string $datetime = null
     ) {
-        $this->phoneNumber = $phoneNumber;
+        $this->phoneNumbers = $phoneNumber;
 
         $this->sms = $sms;
 
         $this->datetime = $datetime;
-
-        $this->reference = $reference;
     }
 
     /**
-     * Número telefonico a enviar SMS.
+     * Números telefónicos a enviar SMS separados por coma.
      *
-     * @param string $phoneNumber
+     * @param string $phoneNumbers
      * @return  $this
      */
-    public function phoneNumber(string $phoneNumber): self
+    public function phoneNumbers(string $phoneNumbers): self
     {
-        $this->phoneNumber = $phoneNumber;
+        $this->phoneNumbers = $phoneNumbers;
 
         return $this;
     }
@@ -75,26 +62,12 @@ class HablameMessage
         return $this;
     }
 
-    /**
-     * [optional] Número de reference o nombre de campaña.
-     *
-     * @param string|null $reference
-     * @return  $this
-     */
-    public function reference(string $reference = null): self
-    {
-        $this->reference = $reference;
-
-        return $this;
-    }
-
     public function toArray(): array
     {
         return [
-            'toNumber' => $this->phoneNumber,
+            'phoneNumbers' => $this->phoneNumbers,
             'sms' => $this->sms,
             'sendDate' => $this->datetime,
-            'reference' => $this->reference,
         ];
     }
 }
