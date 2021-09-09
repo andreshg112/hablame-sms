@@ -25,8 +25,8 @@ class HablameMessage
     /**
      * Números telefónicos a enviar SMS separados por coma.
      *
-     * @param string $phoneNumbers
-     * @return  $this
+     * @param  string  $phoneNumbers
+     * @return $this
      */
     public function phoneNumbers(string $phoneNumbers): self
     {
@@ -38,8 +38,8 @@ class HablameMessage
     /**
      * Mensaje de texto a enviar.
      *
-     * @param string $sms
-     * @return  $this
+     * @param  string  $sms
+     * @return $this
      */
     public function sms(string $sms): self
     {
@@ -52,8 +52,8 @@ class HablameMessage
      * [optional] Fecha de envío. Si está vacío, se envía inmediatamente.
      * (Ejemplo: 2017-12-31 23:59:59).
      *
-     * @param string|null $datetime
-     * @return  $this
+     * @param  string|null  $datetime
+     * @return $this
      */
     public function datetime(string $datetime = null): self
     {
