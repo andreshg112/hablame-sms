@@ -9,8 +9,8 @@ class HablameChannel
     /**
      * Send the given notification.
      *
-     * @param \Illuminate\Notifications\Notifiable $notifiable
-     * @param \Andreshg112\HablameSms\HablameNotification $notification
+     * @param  \Illuminate\Notifications\Notifiable  $notifiable
+     * @param  \Andreshg112\HablameSms\HablameNotification  $notification
      *
      * @throws \Andreshg112\HablameSms\Exceptions\CouldNotSendNotification
      */

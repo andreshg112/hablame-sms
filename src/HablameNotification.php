@@ -9,7 +9,7 @@ abstract class HablameNotification extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param \Illuminate\Notifications\Notifiable $notifiable
+     * @param  \Illuminate\Notifications\Notifiable  $notifiable
      */
     public function via($notifiable): array
     {
@@ -19,7 +19,7 @@ abstract class HablameNotification extends Notification
     /**
      * Returns the SMS(s) to send through Háblame SMS.
      *
-     * @param \Illuminate\Notifications\Notifiable $notifiable
+     * @param  \Illuminate\Notifications\Notifiable  $notifiable
      */
     abstract public function toHablameNotification($notifiable): HablameMessage;
 }
