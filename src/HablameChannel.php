@@ -8,7 +8,8 @@ class HablameChannel
 {
     /**
      * Send the given notification.
-     * @param \Illuminate\Notifications\Notifiable $notifiable
+     *
+     * @param  \Illuminate\Notifications\Notifiable  $notifiable
      * @throws \Andreshg112\HablameSms\Exceptions\CouldNotSendNotification
      */
     public function send($notifiable, HablameNotification $notification)

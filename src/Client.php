@@ -62,11 +62,11 @@ class Client
     /**
      * Envía un mensaje de texto (SMS) al destinatario indicado.
      *
-     * @param string $phoneNumbers Número telefonico a enviar SMS.
-     * @param string $sms Mensaje de texto a enviar.
-     * @param string|null $datetime [optional] Fecha de envío. Si está vacío, se envía inmediatamente.
-     * @param bool $flash [optional] Indica si es un mensaje flash, es decir, que ocupa la pantalla.
-     * @param bool $priority [optional] Indica si el mensaje es prioritario (costo adicional). Se ignora si se especifican varios destinatarios.
+     * @param  string  $phoneNumbers  Número telefonico a enviar SMS.
+     * @param  string  $sms  Mensaje de texto a enviar.
+     * @param  string|null  $datetime  [optional] Fecha de envío. Si está vacío, se envía inmediatamente.
+     * @param  bool  $flash  [optional] Indica si es un mensaje flash, es decir, que ocupa la pantalla.
+     * @param  bool  $priority  [optional] Indica si el mensaje es prioritario (costo adicional). Se ignora si se especifican varios destinatarios.
      * @return array The response body.
      * @throws \Andreshg112\HablameSms\Exceptions\CouldNotSendNotification
      */
